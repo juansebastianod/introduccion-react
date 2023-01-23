@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Contador from './Componentes/contador';
+//import Contador from './Componentes/contador';
 
 
 
@@ -11,7 +11,7 @@ import Contador from './Componentes/contador';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
-    <Contador />
+    <App />
 
     //esesaludo se llama desde propiedades.saludo
 

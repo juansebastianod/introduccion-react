@@ -4,37 +4,84 @@ import { TodoCounter} from './TodoCounter';
 import { TodoSeach } from './TodoSeach';
 import { TodoList } from './TodoList';
 import { TodoItem } from './TodoItem';
+import { CreateTodoButton } from './CreateTodoButton';
 // import './App.css';
-const todos=[{
+const defaultodos=[{
 text:"cortar cebollas",
-completar:false
+completed:false
 },
 {
   text:"cortar zanahoria",
-  completar:false
+  completed:false
 
 },
 
 {
   text:"cortar remolacha",
-  completar:false
+  completed:false
 
 },
+{
+  text:"correr",
+  completed:true
+
+}
 ]
 function App() {
+
+
+  const [todos,setTodo]=React.useState(defaultodos);
+
+  const [search,setSearch]=React.useState("");
+
+  const completedTodos=todos.filter(todos=>todos.completed).length
+
+  const totalTodos=todos.length;
+
+  let array=[];
+
+  if(search.length<=1){
+
+    array=todos;
+
+    console.log(search.length)
+  }else{
+
+    
+    array=todos.filter(todo=>{
+
+      const todoText=todo.text.toLowerCase().includes(search.toLocaleLowerCase())
+      return todoText
+    })
+
+    
+  }
   return (
    <React.Fragment>
 
-    {<TodoCounter/>}
+    {<TodoCounter
+    
+    total={totalTodos}
+    completed={completedTodos}
+    />}
    
 
-    {<TodoSeach/>}
+    {<TodoSeach
+  search={search}
+  setSearch={setSearch}
+    
+    />}
 
 
     {<TodoList>
-    {todos.map(todo=>(
+    {array.map(array=>(
 
-      <TodoItem key={todo.text} text={todo.text}/> 
+      <TodoItem 
+      key={array.text}
+     
+      text={array.text}
+      
+      completed={array.completed}/> 
    ))}
 
  
@@ -42,7 +89,7 @@ function App() {
     </TodoList>}  
     {/* {<CreateTodoButton/>} */}
 
-    <button>enviar</button>
+    <CreateTodoButton />
 
     </React.Fragment>
   );
